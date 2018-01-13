@@ -37,8 +37,8 @@ specification for the core interpreter.  On the other hand, libraries can evolve
 include all source code with it and thus will be runnable.
 
 One of the concerns is preserving kinds of information other than text: sounds, graphical images, video, 3D
-environments. This could be addressed by additional specifications for the environment (I call it Perpetual), which will
-interact with Eternal and interpret multimedia data for the user.
+environments, mind-machine interface "thoughts". This could be addressed by additional specifications for the
+environment (I call it Perpetual), which will interact with Eternal and interpret multimedia data for the user.
 
 Third component, code-named Immortal, will give artificial intelligence (AI) capabilities to Eternal and will be written
 purely in Eternal. However, Perpetual could be used to represent multimedia data for it as well. Immortal opens broad
