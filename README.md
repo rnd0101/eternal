@@ -25,6 +25,13 @@ Then any program written in this language could be runnable.  More than that, Et
 libraries written for it. Those who want their processing techniques to be preserved for a long time will need to store
 these libraries together with their programs.
 
+It seems like more than one derivative computational abstractions will be needed for Eternal. For example, several
+optimizing translators can be imagined not only for specific target hardware and higher-level languages, but rather a
+system, which will be capable to interpret formal hardware descriptions and derive simulators to run software on.  For
+example, to run a C program on a simulated 80286 CPU, both CPU's specification and compiler code is needed. There maybe
+several cycles of compiler bootstrapping recompilation and optimization to get Eternal to acceptable simulation speed,
+but the most important is to arrive at the ability to run a program.
+
 One feature of Eternal must be the invariance of it's specification.  There must be only one version of the
 specification for the core interpreter.  On the other hand, libraries can evolve, because every Eternal program will
 include all source code with it and thus will be runnable.
@@ -51,6 +58,19 @@ The most useful applications of Eternal could be:
 
 Eternal specifications, reference implementations in different languages and libraries must be in Public Domain. As far
 as I know, there is nothing comparable to the Eternal idea.
+
+## Development ideas
+
+Main courses of action could be:
+* Finding convenient lowest-level computatinal appratus as a base for Eternal
+* Eternal translator specification,
+* Perpetual and Immortal components descriptions with their interactions with Eternal,
+* Treatment of how Eternal applicability to the problems.
+
+## History
+
+This idea started in Summer 2001 (see `docs/2001` for a historical reference). The article was rejected as too vague for 
+SIGPLAN Notices, with some feedback given.
 
 ## Acknowledgments
 
