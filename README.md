@@ -67,6 +67,21 @@ Main courses of action could be:
 * Perpetual and Immortal components descriptions with their interactions with Eternal,
 * Treatment of how Eternal applicability to the problems.
 
+Candidates for the foundational language (in alphabetical order):
+* Assembler for hypothetical machine (eg, Knuth's MIX)
+* Combinator-based computational system
+* Forth variant
+* LISP-like language
+* Lambda-calculus variant
+* ML variant
+* oMiser
+* RDF-based knowledge representation language
+
+Those are not necessarily mutually exclusive at this moment even for the foundations.
+
+The next level target is C language, some ML-language, eg, Ocaml. This will open up a lot of possibilities already, both
+in concrete software preservation and enabling writing compilers to bridge other technilogies.
+
 ## History
 
 This idea started in Summer 2001 (see `docs/2001` for a historical reference). The article was rejected as too vague for 
