@@ -79,8 +79,8 @@ Candidates for the foundational language (in alphabetical order):
 
 Those are not necessarily mutually exclusive at this moment even for the foundations.
 
-The next level target is C language, some ML-language, eg, Ocaml. This will open up a lot of possibilities already, both
-in concrete software preservation and enabling writing compilers to bridge other technilogies.
+The next level target is C language, LISP, some ML-language, eg, Ocaml. This will open up a lot of possibilities
+already, both in concrete software preservation and enabling writing compilers to bridge other technilogies.
 
 ## History
 
