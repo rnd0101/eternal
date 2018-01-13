@@ -1,0 +1,102 @@
+This file contains first public mentioning of the concept and Roman Suzi's
+replies to the thread.  Mostly authentic, but some URLs doubled with
+archive.org URLs to point to content of that time.
+
+See also python-list-excerpts.txt .
+
+
+Date:       2001-07-07 12:42:45
+
+Hello,
+
+Latest Guido's decisions about xrange, / vs. div, etc, gave an interesting
+idea which, probably, will find some followers.
+
+The idea is to create Eternal programming style (or language -
+I am not sure).
+
+Let me explain.
+
+I want to be 100% sure that some things I use today will stay forever.
+My main concerns are:
+
+- archivators/compressors
+- picture-showing utilities
+- format converters
+- file-system recognizers
+-
+
+The Eternal language must have the following features:
+
+1. Small set of well-defined features and operations:
+   - basic integer operations
+   - basic string operations
+   - way to extend language dictionary to allow even
+   syntactical changes
+   - basic IO capabilities. I mean really basic:
+   1 input and 1 output stream of bytes.
+
+2. Universal set of algorithmic constructions:
+   if, while, for (like in Python or dumbed down)
+
+3. Small set of libraries, written entirely in Eternal
+
+4. There is only ONE fully described way of how core Eternal
+   should function. All extensions only thru libraries
+   which must be 7-bit clean (and thus Unicode too)
+
+Eternal programs must remain Eternal as long as humanity use latin aphabet
+(26 digits), 0-9 digits, ".", ",", spaces. All other characters must be
+defined thru special macros.
+
+The main feature of Eternal is:
+
+-------------------------------------------------------------------------
+5. the interpreter of the language must be buildable from 2-page specs by
+any programmer in (nearly) any language and platform in reasonable time
+(0.5-8 hours, depending on the proficiency).
+-------------------------------------------------------------------------
+
+Then extension libraries could be applied to the core and we get complete
+language. Every program must be distributed with source, libraries and a
+spec to build Eternal so, anyone could run them after building
+interpreter. It doesn't matter how large libraries are used as long as
+they are written in pure Eternal. NO "downloadable" modules and such.
+Every Eternal program is monolithic and if it is not functional, it is not
+eternal.
+
+The main concern of the Eternal to be usable by any computers which could
+do simple things like arithmetics, put strings together, store data and
+such.
+------------------------------------------------------------------
+
+6. Eternal specs, interpreter and base library must be in Public Domain.
+
+7. There will be only ONE TRUE ORIGINAL core Eternal Spec, no enhancements
+ever. And I would like the Spec to be on the stone of my tomb..!
+
+The closest of all to described as Eternal is... Forth. I even think, that
+some well-defined minimal subset of Forth will do.
+
+This way, Eternal programs could _look_ as whatever language as long as
+they use nothing but pure Eternal. Otherwise, as you can guess, your
+program are no more eternal ;-)
+
+And I think Eternal will be really easy to write in Python ;-)
+
+Gee... This doc is probably suitable for humour page and it's
+author for psychiatric clinic ;-)
+
+But I really-really frustrated keep up-to-date with things which need
+eternity...
+
+Self-appointed Eternal BDFL&D,
+Roman Suzi
+-- 
+_/ Russia _/ Karelia _/ Petrozavodsk _/ rnd@onego.ru _/
+_/ Saturday, July 07, 2001 _/ Powered by Linux RedHat 6.2 _/
+_/ "OK, I'm weird! But I'm saving up to become eccentric." _/
+
+
+-- 
+http://mail.python.org/mailman/listinfo/python-list

@@ -1,0 +1,246 @@
+Follow up discussion, only Roman Suzi's reply visible here.
+See https://marc.info/?t=99451016700001&r=1&w=2 for the whole thread.
+
+
+Date:       2001-07-07 15:29:50
+
+Lets imagine you want to run a program 300 years from now. C compiler no
+longer exists. Intel hardware sells no longer. No weird MS Word
+files. Python 123.3.4 with almost anything changed compared with version
+1.5.2 ;-)
+
+What is left:
+
+Data storage, 8 bit bytes, latin letters, 10 digits, some computers with
+some formal programming languages, and some programmers ;-) who are
+capable to program very simple core interpreter in the language they will
+have at hands. (Even mathematicians will be enough).
+
+So, after they program core interpreter according to specs, they will have
+all Eternal software ready to run!
+
+What I half-jokingly proposed is "do it yourself" core interpreter which
+could interprete code written in some simple code, able to evolve like
+Forth does.
+
+AFAIK, there is nothing similar to Eternal apart from Turing machine or
+basic math notation.
+
+This way, the portability is utmost: you write simple core interpreter (~
+RISC-processor) and you can run software!
+
+And you have NO troubles of getting 300 years old hardware, CPU specs,
+etc, etc - only data stored in 8-bit bytes + the only informal piece
+missing: interpreter.
+
+Can you see the root of the idea now?
+
+Of course, only things of historical value will be done in Eternal:
+* JPEG->ASCII convertor
+* bzip2 decompressor
+and so on.
+
+
+Date:       2001-07-08 7:06:52
+
+
+I am glad to see biological examples. Eternal program is like seed
+which could grow around small rightly built environment.
+
+The problem, as I see it now, is scientific: which features
+to include to the core. For example, if one want to do logic,
+there is only one operation needed (i do not know how to call it in
+English:
+
+X    Y      X/Y
+0    0      1
+1    0      1
+0    1      1
+1    1      0
+
+With this single operation you can build any boolean operation:
+
+not X  ==  X/X
+X and Y  == not(X/Y) == (X/Y)/(X/Y)
+X or Y == (not X)/(not Y) == (X/X)/(Y/Y)
+
+and so on!
+
+I believe, that there is some set of operations which is as general as
+Turing machine BUT is easily evolutionable into something practical.
+The above means you need to implement only one operation and library
+will create: AND, OR, XOR, NOT, ... whatever.
+
+Same applies to arithmetics. Field operations need to be
+supplied: x+y, -x, x*y, 1/x.
+
+I think Eternal will also need strong text-processing capabilities.
+Thus minimal DFA regex need to be built in. (this is beneficial to
+core itself, because it will need some parser and the parser could be
+available for program evolution as well.) Deterministic Turing machine
+is DFA + potentially unbounded memory to play on.
+
+It's really interesting reasearch which (probably) nobody has done
+yet.
+
+State of the Eternal machine could be comprised of a dictionary of
+lists of strings (which are keys to the dictionaries or literals)
+(Pythoner's thinking showing ;-) and interpreter will be just
+executing elements from some list while not told to switch to another
+one. Program could be self-modifying all the way, like in Lisp.
+
+At first, only main interpreter loop entry exists, entry for the
+interpreter EXEC, dictionary/list access operations, IO and
+fundamental arithm. and logic things. ALL these could be replaced later by
+more advanced versions from library.
+
+def core_add():
+  memory["STACK"][0:2] =  [int(memory["STACK"][0]) + int(memory["STACK"][1])]
+
+memory = {
+'EXEC': core_exec,
+'MAIN': ['READ', 'EXEC', 'MAIN'],  # tail recursion need catching
+'READ': core_read_input,
+# ...
+'ADD': core_add,
+'IP': ['0', 'MAIN']
+'STACK': [],
+}
+
+interpreter(input, memory) -> output
+
+
+Date:       2001-07-10 8:37:09
+
+
+...it's about saving procedures
+to access stored data: crypto technique, format converters, etc.
+
+I want to be able to restore my old tar.gz archive, etc. Yes, nobody will
+probably use it anymore, but the data it contains could be of interest.
+So, I want to make sure procedures will be written in such a language to
+allow fast retrieval.
+
+The fastest way to do it is to implement special very simple interpreter
+(in the language which will be available in the future) and then feed it
+with data input and receive data output.
+
+
+
+Date:       2001-07-10 15:45:18
+
+
+
+The following script was written in half an hour 
+(after I found this page:
+
+http://chemlab.pc.maricopa.edu/pocket/pfmanual.html
+https://web.archive.org/web/20010627223306/chemlab.pc.maricopa.edu/pocket/pfmanual.html
+
+(Chemists are going to use Forth in nanotech programming. ;-) 
+
+#!/usr/bin/python
+# -*- mode: python -*-
+# future core Eternal/Python implementation ;-)
+# This code is in Public Domain
+# $Id:$
+
+global defining, stack, dictionary, executionstack
+
+defining = 0
+
+def _DOT():
+  global stack
+  try:
+    v = stack.pop()
+    print v
+    return 1
+  except:
+    return None
+
+def _ADD():
+  global stack
+  try:
+    v2 = stack.pop()
+    v1 = stack.pop()
+    stack.append(v1+v2)
+    return 1
+  except:
+    return None
+
+stack = []
+dictionary = {
+  "." : {'immediate': 0, 'body': _DOT},
+  "+" : {'immediate': 0, 'body': _ADD},
+  }
+
+def isnumber(x):
+  try:
+    int(x)
+  except:
+    return None
+  return x
+
+def builtin(word):
+  return type(word['body']) == type(builtin)
+
+def SEARCH(token):
+  global dictionary
+  try:
+    return dictionary[token]
+  except:
+    return None
+
+def EXECUTE(word):
+  if builtin(word):
+    return word['body']()
+  else:
+    return INTERPRETE(word['body'])
+
+def EMPTYSTACK():
+  raise "Empty stack"
+
+def WHAT_IS_IT():
+  raise "???"
+
+def COMPILE(token):
+  pass
+
+def LITERAL(token):
+  pass
+  
+def INTERPRET(tokens):
+  global defining, stack
+  for token in tokens:
+    found = SEARCH(token)
+    if found:
+      if not defining or found['immediate']:
+        if not EXECUTE(found):
+          EMPTYSTACK()
+      else:
+        COMPILE(token)
+    else:
+      if isnumber(token):
+        if not defining:
+          stack.append(int(token))
+        else:
+          LITERAL(token)
+      else:
+        WHAT_IS_IT(token)
+  return 1    
+
+INTERPRET(["1", "2", "+", "."])
+
+# End of interpreter.py
+
+TODO:
+ - executionstack instead of Python-based recursion
+ - compiling part of the story
+ - what is MCOMPILE and is it useful enough to complicate things? 
+ - token reader
+ - where globals should live? (multithreading-safely)
+ - error handling
+
+It needs courage to replace Forth's machine-code orientedness into
+very-high Python structures ;-) I just can't decide if I want to emulate
+memory arrays or do it in free fashion ;-)
