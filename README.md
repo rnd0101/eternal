@@ -70,7 +70,7 @@ Main courses of action could be:
 ## History
 
 This idea started in Summer 2001 (see `docs/2001` for a historical reference). The article was rejected as too vague for 
-SIGPLAN Notices, with some feedback given.
+SIGPLAN Notices, with some useful feedback given.
 
 ## Acknowledgments
 
